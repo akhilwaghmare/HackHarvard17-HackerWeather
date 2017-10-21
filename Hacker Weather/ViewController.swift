@@ -10,31 +10,37 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    // Connections to UI
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var precipLabel: UILabel!
+    @IBOutlet weak var humidityLabel: UILabel!
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var imageOverlay: UIView!
     
+    // Weather object containing current information presented to user
     var weather: Weather? {
         didSet {
             updateUI()
         }
     }
     
+    // URL for json file with weather information
     private let apiUrl = "http://awlabs.tech/api/hackharvard17/weather.json"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         setupUI()
-        weather = Weather(location: "Cambridge, MA", temperature: 76, precipChance: 20.5, imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Memorial_Hall_%28Harvard_University%29_-_facade_view.JPG")
+        weather = Weather(location: "Cambridge, MA", temperature: 67, precipChance: 0.00, humidity: 0.37, imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Memorial_Hall_%28Harvard_University%29_-_facade_view.JPG")
     }
     
+    // Make the status bar information white (to look better on dark content)
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
+    // Action for when refresh button is tapped
     @IBAction func refreshWeather(_ sender: Any) {
         fetchWeather()
     }
@@ -43,11 +49,13 @@ class ViewController: UIViewController {
 
 private extension ViewController {
     
+    // Initial UI setup
     func setupUI() {
         imageOverlay.alpha = 0.5
         backgroundImageView.contentMode = .scaleAspectFill
     }
     
+    // Update UI with new weather information
     func updateUI() {
         guard let weather = weather else {
             return
@@ -65,11 +73,16 @@ private extension ViewController {
             }, completion: nil)
             
             UIView.transition(with: self.precipLabel, duration: 0.5, options: .transitionCrossDissolve, animations: {
-                self.precipLabel.text = "Chance of precipitation: \(weather.precipChance)%"
+                self.precipLabel.text = "Chance of precipitation: \(Int(weather.precipChance * 100))%"
+            }, completion: nil)
+            
+            UIView.transition(with: self.humidityLabel, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                self.humidityLabel.text = "Humidity: \(Int(weather.humidity * 100))%"
             }, completion: nil)
         }
     }
     
+    // General function for fetching an image from URL
     func fetchImage(from imageUrl: String) {
         guard let url = URL(string: imageUrl) else {
             return
@@ -89,6 +102,7 @@ private extension ViewController {
         task.resume()
     }
     
+    // Fetching weather information from URL. Resulting JSON is directly decoded to Weather struct.
     func fetchWeather() {
         guard let url = URL(string: apiUrl) else {
             return

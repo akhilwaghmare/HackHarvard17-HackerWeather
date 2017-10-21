@@ -50,19 +50,28 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Humidity:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v5P-zb-o5T">
+                                <rect key="frame" x="147" y="356" width="80" height="22"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Ti3-9h-Acc" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="4qe-bK-TUn"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ZIb-Fz-vaQ" secondAttribute="trailing" constant="16" id="7ds-sH-b4f"/>
+                            <constraint firstItem="ZIb-Fz-vaQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8Wg-V2-IZV" secondAttribute="trailing" constant="12" id="DAS-eG-FPi"/>
                             <constraint firstItem="O5A-7o-K8V" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="DXz-MK-2JV"/>
                             <constraint firstItem="Ti3-9h-Acc" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="EiP-YP-ee4"/>
                             <constraint firstItem="Ti3-9h-Acc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="JNq-0N-vwB"/>
                             <constraint firstItem="8Wg-V2-IZV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Jz4-P3-vgo"/>
+                            <constraint firstItem="v5P-zb-o5T" firstAttribute="top" secondItem="XEN-MP-1gb" secondAttribute="bottom" constant="12" id="O3o-WP-LXP"/>
                             <constraint firstItem="ZIb-Fz-vaQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="QBV-Ms-Hzj"/>
                             <constraint firstItem="O5A-7o-K8V" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Qg2-DP-spg"/>
                             <constraint firstItem="Ti3-9h-Acc" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="TGb-XW-FkN"/>
                             <constraint firstItem="8Wg-V2-IZV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="YlY-5X-aBy"/>
+                            <constraint firstItem="v5P-zb-o5T" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="de6-be-fft"/>
                             <constraint firstItem="XEN-MP-1gb" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="dot-va-ShE"/>
                             <constraint firstItem="O5A-7o-K8V" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="gmf-ji-5MV"/>
                             <constraint firstItem="XEN-MP-1gb" firstAttribute="top" secondItem="GZN-Kv-9z7" secondAttribute="bottom" constant="48" id="jqC-VO-VeS"/>
@@ -74,6 +83,7 @@
                     </view>
                     <connections>
                         <outlet property="backgroundImageView" destination="O5A-7o-K8V" id="jNt-yp-dN7"/>
+                        <outlet property="humidityLabel" destination="v5P-zb-o5T" id="VJr-vR-Cce"/>
                         <outlet property="imageOverlay" destination="Ti3-9h-Acc" id="kbS-6d-5Yi"/>
                         <outlet property="locationLabel" destination="8Wg-V2-IZV" id="Ktr-RN-WP5"/>
                         <outlet property="precipLabel" destination="XEN-MP-1gb" id="Bxp-D4-2S9"/>
