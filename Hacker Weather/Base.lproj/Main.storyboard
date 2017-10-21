@@ -25,8 +25,15 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZN-Kv-9z7">
-                                <rect key="frame" x="-22" y="188" width="418" height="86"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZIb-Fz-vaQ">
+                                <rect key="frame" x="337" y="36" width="22" height="22"/>
+                                <state key="normal" image="Refresh"/>
+                                <connections>
+                                    <action selector="refreshWeather:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ACR-gu-KdE"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 ˚" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZN-Kv-9z7">
+                                <rect key="frame" x="138" y="188" width="99" height="86"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="72"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -47,10 +54,12 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Ti3-9h-Acc" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="4qe-bK-TUn"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ZIb-Fz-vaQ" secondAttribute="trailing" constant="16" id="7ds-sH-b4f"/>
                             <constraint firstItem="O5A-7o-K8V" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="DXz-MK-2JV"/>
                             <constraint firstItem="Ti3-9h-Acc" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="EiP-YP-ee4"/>
                             <constraint firstItem="Ti3-9h-Acc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="JNq-0N-vwB"/>
                             <constraint firstItem="8Wg-V2-IZV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Jz4-P3-vgo"/>
+                            <constraint firstItem="ZIb-Fz-vaQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="QBV-Ms-Hzj"/>
                             <constraint firstItem="O5A-7o-K8V" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Qg2-DP-spg"/>
                             <constraint firstItem="Ti3-9h-Acc" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="TGb-XW-FkN"/>
                             <constraint firstItem="8Wg-V2-IZV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="YlY-5X-aBy"/>
@@ -76,4 +85,7 @@
             <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Refresh" width="22" height="22"/>
+    </resources>
 </document>

@@ -16,32 +16,58 @@ class ViewController: UIViewController {
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var imageOverlay: UIView!
     
-    var weather: Weather?
+    var weather: Weather? {
+        didSet {
+            updateUI()
+        }
+    }
+    
+    private let apiUrl = "http://awlabs.tech/api/hackharvard17/weather.json"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        weather = Weather(location: "Cambridge, MA", temperature: 76, precipChance: 20.5, imageUrlString: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Memorial_Hall_%28Harvard_University%29_-_facade_view.JPG")
-        imageOverlay.backgroundColor = .black
-        imageOverlay.alpha = 0.5
-        updateUI()
+        setupUI()
+        weather = Weather(location: "Cambridge, MA", temperature: 76, precipChance: 20.5, imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Memorial_Hall_%28Harvard_University%29_-_facade_view.JPG")
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
+    @IBAction func refreshWeather(_ sender: Any) {
+        fetchWeather()
+    }
+    
 }
 
 private extension ViewController {
+    
+    func setupUI() {
+        imageOverlay.alpha = 0.5
+        backgroundImageView.contentMode = .scaleAspectFill
+    }
     
     func updateUI() {
         guard let weather = weather else {
             return
         }
-        locationLabel.text = weather.location
-        temperatureLabel.text = "\(weather.temperature)˚"
-        precipLabel.text = "Chance of precipitation: \(weather.precipChance)%"
-        fetchImage(from: weather.imageUrlString)
+        
+        fetchImage(from: weather.imageUrl)
+        
+        DispatchQueue.main.async {
+            UIView.transition(with: self.locationLabel, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                self.locationLabel.text = weather.location
+            }, completion: nil)
+            
+            UIView.transition(with: self.temperatureLabel, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                self.temperatureLabel.text = "\(weather.temperature)˚"
+            }, completion: nil)
+            
+            UIView.transition(with: self.precipLabel, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                self.precipLabel.text = "Chance of precipitation: \(weather.precipChance)%"
+            }, completion: nil)
+        }
     }
     
     func fetchImage(from imageUrl: String) {
@@ -55,14 +81,31 @@ private extension ViewController {
             }
             let fetchedImage = UIImage(data: data)
             DispatchQueue.main.async {
-                //self.backgroundImageView.image = fetchedImage
-                self.backgroundImageView.contentMode = .scaleAspectFill
-                
                 UIView.transition(with: self.backgroundImageView, duration: 0.5, options: .transitionCrossDissolve, animations: {
                     self.backgroundImageView.image = fetchedImage
                 }, completion: nil)
             }
         }
         task.resume()
+    }
+    
+    func fetchWeather() {
+        guard let url = URL(string: apiUrl) else {
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard error == nil, let data = data else {
+                return
+            }
+            
+            do {
+                let newWeather = try JSONDecoder().decode(Weather.self, from: data)
+                self.weather = newWeather
+            } catch let err {
+                print(err.localizedDescription)
+            }
+            
+        }.resume()
     }
 }

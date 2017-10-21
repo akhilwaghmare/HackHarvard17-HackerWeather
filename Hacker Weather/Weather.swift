@@ -8,16 +8,16 @@
 
 import Foundation
 
-class Weather {
+struct Weather: Decodable {
     var location: String
     var temperature: Int
     var precipChance: Float
-    var imageUrlString: String
+    var imageUrl: String
     
-    init(location: String, temperature: Int, precipChance: Float, imageUrlString: String) {
-        self.location = location
-        self.temperature = temperature
-        self.precipChance = precipChance
-        self.imageUrlString = imageUrlString
-    }
+//    init(location: String, temperature: Int, precipChance: Float, imageUrl: String) {
+//        self.location = location
+//        self.temperature = temperature
+//        self.precipChance = precipChance
+//        self.imageUrl = imageUrl
+//    }
 }
